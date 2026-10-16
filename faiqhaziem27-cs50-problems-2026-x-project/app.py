@@ -38,7 +38,7 @@ def index():
         entries = db.execute("SELECT category, metric_value, date FROM entries WHERE user_id =? ORDER BY date ASC", user_id)
 
     if not entries:
-        return render_template("index.html",categories=categories, total_entries = 0, total_metric_value = 0, top_category = "None", dates = [], values = [], selected_category=selected_category)
+        return render_template("index.html", categories=categories, total_entries=0, total_metric_value=0, top_category="None", dates=[], labels=[], values=[], selected_category=selected_category)
 
     total_entries = len(entries)
     total_metric_value = 0
