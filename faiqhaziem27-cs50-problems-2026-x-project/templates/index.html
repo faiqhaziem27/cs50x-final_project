@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h2>Dashboard</h2>
+            <p class="text-muted">Track your progress and visualize your data over time</p>
+        </div>
+    </div>
+
+    <form method="get" action="/" class="row g-3 mb-4">
+        <div class="col-auto">
+            <label for="category" class="col-form-label fw-bold">Filter Category</label>
+        </div>
+
+        <div class="col-auto">
+            <select name="category" id="category" class="form-select" onchange="this.form.submit()">
+                <option value="All" {% if not selected_category or selected_category == "All" %}selected{% endif %}>All Categories</option>
+                {% for cat in categories %}
+                    <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </form>
+
+    <div class="row text-center mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm p-3">
+                <h5 class="text-secondary">Total Entries</h5>
+                <h3 class="fw-bold">{{ total_entries }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm p-3">
+                <h5 class="text-secondary">Total Value</h5>
+                <h3 class="fw-bold">{{ total_metric_value }}</h3>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm p-3">
+                <h5 class="text-secondary">Top Category</h5>
+                <h3 class="fw-bold">{{ top_category }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm p-4">
+                <h4 class="mb-4">Performance Overview</h4>
+                <canvas id="metric_value" width="400" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = {{ labels | tojson }};
+    const values = {{ values | tojson }};
+
+    const ctx = document.getElementById("metric_value");
+
+    const metric_chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets : [
+                {
+                    label: 'metric_value',
+                    data: values,
+                    borderColor: 'rgba(13, 110, 253, 1)',
+                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                    borderWidth: 2
+                }
+            ]
+        },
+
+        options: {
+            responsive: true,
+            scales: {
+                beginAtZero: true
+            }
+        }
+    });
+</script>
+
+{% endblock %}

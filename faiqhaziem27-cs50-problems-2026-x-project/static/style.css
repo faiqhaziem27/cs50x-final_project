@@ -1,0 +1,39 @@
+nav .navbar-brand {
+    font-size: xx-large;
+}
+
+nav .navbar-brand .blue {
+    color: #2563eb;
+}
+
+nav .navbar-brand .red {
+    color: #2563eb;
+}
+nav .navbar-brand .white {
+    color: #2563eb;
+}
+
+nav .navbar-brand .yellow {
+    color: #2563eb;
+}
+
+nav .navbar-brand .green {
+    color: #2563eb;
+}
+
+nav .navbar-brand .orange {
+    color: #7c3aed;
+}
+
+nav .navbar-brand .brown {
+    color: #7c3aed;
+}
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}

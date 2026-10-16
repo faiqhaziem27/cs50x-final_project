@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    Edit
+{% endblock %}
+
+{% block main %}
+    <div class="container mt-4" style="max-width: 600px">
+        <div class="card shadow-sm p-4">
+            <h2 class="mb-3">Edit Entry</h2>
+
+            <form action="/edit/{{ entry.id }}" method="post">
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <input autocomplete="off" class="form-control" type="text" id="category" name="category" value="{{ entry.category }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input autocomplete="off" class="form-control" type="date" name="date" id="date" value="{{ entry.date }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="metric_value" class="form-label">Metric Value</label>
+                    <input autocomplete="off" class="form-control" type="number" step="any" name="metric_value" id="metric_value" value="{{ entry.metric_value }}"></input>
+                </div>
+
+                <div class="mb-3">
+                    <label for="unit" class="form-label">Unit</label>
+                    <input autocomplete="off" class="form-control" type="text" name="unit" id="unit" value="{{ entry.unit }}">
+                </div>
+
+                <button class="btn btn-primary" type="submit">Save Changes</button>
+                <a href="/history" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}
